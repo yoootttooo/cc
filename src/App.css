@@ -1,0 +1,25 @@
+body {
+  min-width: 30rem;
+  text-align: center;
+}
+textarea{
+  margin-top: 1rem;
+  width: 90%;
+}
+p{
+  font-size: 1rem;
+}
+#result{
+  /* background-color: antiquewhite; */
+  width: 90%;
+  margin: auto;
+  padding :10px;
+  text-align: start;
+  /* border-radius: 10px 10px 10px 10px; */
+}
+#checkboxes{
+  width: 90%;
+  margin: auto;
+  padding :10px;
+  text-align: left;
+}

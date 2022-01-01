@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "CopyCleaner",
+  "description": "CopyCleaner",
+  "version": "1.1",
+  "browser_action": {
+      "default_title": "CopyCleaner",
+       "default_popup": "index.html"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-WJ2JCCO4RSwN3ISz2MrWP9d3h4cR2xTT9PTRwjD2gnQ='; object-src 'self'"
+}

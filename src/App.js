@@ -130,7 +130,7 @@ function App() {
         <div>文字数：{count}</div>
         <div id="checkboxes">
           <p>
-          <Button color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>label="半角カナ→全角カナ</Button>
+          <Button color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>半角カナ→全角カナ</Button>
           </p>
           <p>
           <Button color={lineColor} name="setting" value="line" checked={line} onClick={settingChenge}>改行削除</Button>

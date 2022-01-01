@@ -119,7 +119,8 @@ function App() {
   //   document.execCommand(text.value);
   // }
   return (
-    <div className="App">
+    <body>
+      <div className="App">
         <TextArea placeholder="ここにコピー" onChange={handleTextareaChange}></TextArea>
         <div>文字数：{originTextCount}</div>
         <div id="result">
@@ -130,19 +131,20 @@ function App() {
         <div>文字数：{count}</div>
         <div id="checkboxes">
           <p>
-          <Button color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>半角カナ→全角カナ</Button>
+            <Button color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>半角カナ→全角カナ</Button>
           </p>
           <p>
-          <Button color={lineColor} name="setting" value="line" checked={line} onClick={settingChenge}>改行削除</Button>
+            <Button color={lineColor} name="setting" value="line" checked={line} onClick={settingChenge}>改行削除</Button>
           </p>
           <p>
-          <Button color={spaceFullColor} name="setting" value="spaceFull" checked={spaceFull} onClick={settingChenge}>全角スペース削除</Button>
+            <Button color={spaceFullColor} name="setting" value="spaceFull" checked={spaceFull} onClick={settingChenge}>全角スペース削除</Button>
           </p>
           <p>
-          <Button color={spaceHalfColor} name="setting" value="spaceHalf" checked={spaceHalf} onClick={settingChenge}>半角スペース削除</Button>
+            <Button color={spaceHalfColor} name="setting" value="spaceHalf" checked={spaceHalf} onClick={settingChenge}>半角スペース削除</Button>
           </p>
         </div>
-    </div>
+      </div>
+    </body>
   );
 }
 

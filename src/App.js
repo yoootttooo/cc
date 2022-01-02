@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { TextArea, Button } from 'semantic-ui-react';
+import { TextArea, Button, Icon, Popup } from 'semantic-ui-react';
 
 function App() {
   const [text, setText] = useState("");
@@ -17,7 +17,6 @@ function App() {
   const [spaceHalfColor, setSpaceHalfColor] = useState("gray")
 
   const handleTextareaChange = (e) => {
-    console.log(e.target.value)
     if(e.target.value !== null){
       setText(e.target.value)
     }
@@ -112,7 +111,10 @@ function App() {
     spaceHalf ? setSpaceHalfColor('green') : setSpaceHalfColor('gray');
   },[kanaHalf, line, spaceHalf, spaceFull])
 
-
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(normalizedText)
+  }
+  
   // 権限の関係でchrome拡張でコピーするのはこれではできないっぽい？
   // function copyText() {
   //   let text = document.getElementById("normalizedText");
@@ -121,27 +123,28 @@ function App() {
   return (
     <body>
       <div className="App">
-        <TextArea placeholder="ここにコピー" onChange={handleTextareaChange}></TextArea>
+        <TextArea placeholder="ここに入力" onChange={handleTextareaChange}></TextArea>
         <div>文字数：{originTextCount}</div>
         <div id="result">
-          <h1>結果</h1>
+          <h1 style={{display: "inline", fontSize: "1.5em"}}>結果</h1>
+          <Popup
+            content='Copied!'
+            on='click'
+            pinned
+            trigger={<Icon style={{margin: "0em 0.7em"}} name="copy" size='large' onClick={copyToClipboard} />}
+          />
           <div id="normalizedText">{normalizedText}</div>
         </div>
         <br/>
         <div>文字数：{count}</div>
-        <div id="checkboxes">
-          <p>
-            <Button color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>半角カナ→全角カナ</Button>
-          </p>
-          <p>
-            <Button color={lineColor} name="setting" value="line" checked={line} onClick={settingChenge}>改行削除</Button>
-          </p>
-          <p>
-            <Button color={spaceFullColor} name="setting" value="spaceFull" checked={spaceFull} onClick={settingChenge}>全角スペース削除</Button>
-          </p>
-          <p>
-            <Button color={spaceHalfColor} name="setting" value="spaceHalf" checked={spaceHalf} onClick={settingChenge}>半角スペース削除</Button>
-          </p>
+        <div id="buttons">
+            <Button size="tiny" color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>半角カナ→全角カナ</Button>
+            <br/>
+            <Button size="tiny" color={lineColor} name="setting" value="line" checked={line} onClick={settingChenge}>改行削除</Button>
+            <br/>
+            <Button size="tiny" color={spaceFullColor} name="setting" value="spaceFull" checked={spaceFull} onClick={settingChenge}>全角スペース削除</Button>
+            <br/>
+            <Button size="tiny" color={spaceHalfColor} name="setting" value="spaceHalf" checked={spaceHalf} onClick={settingChenge}>半角スペース削除</Button>
         </div>
       </div>
     </body>

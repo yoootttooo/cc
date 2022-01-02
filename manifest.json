@@ -7,5 +7,8 @@
       "default_title": "CopyCleaner",
        "default_popup": "index.html"
   },
+  "permissions" : [
+    "clipboardWrite"
+  ],
   "content_security_policy": "script-src 'self' 'sha256-WJ2JCCO4RSwN3ISz2MrWP9d3h4cR2xTT9PTRwjD2gnQ='; object-src 'self'"
 }

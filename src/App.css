@@ -1,5 +1,5 @@
 body {
-  min-width: 30rem;
+  min-width: 35rem;
   text-align: center;
 }
 textarea {
@@ -20,11 +20,12 @@ p {
 #buttons {
   width: 90%;
   margin: auto;
+  margin-bottom: 0.4em;
   padding: 0;
-  text-align: left;
+  text-align: center;
 }
 
 #buttons button {
-  margin: 0.4em 0em;
+  margin: 0.2em;
   padding: 0.7em;
 }

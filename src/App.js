@@ -131,6 +131,7 @@ function App() {
             content='Copied!'
             on='click'
             pinned
+            size='mini'
             trigger={<Icon style={{margin: "0em 0.7em"}} name="copy" size='large' onClick={copyToClipboard} />}
           />
           <div id="normalizedText">{normalizedText}</div>
@@ -139,11 +140,8 @@ function App() {
         <div>文字数：{count}</div>
         <div id="buttons">
             <Button size="tiny" color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>半角カナ→全角カナ</Button>
-            <br/>
             <Button size="tiny" color={lineColor} name="setting" value="line" checked={line} onClick={settingChenge}>改行削除</Button>
-            <br/>
             <Button size="tiny" color={spaceFullColor} name="setting" value="spaceFull" checked={spaceFull} onClick={settingChenge}>全角スペース削除</Button>
-            <br/>
             <Button size="tiny" color={spaceHalfColor} name="setting" value="spaceHalf" checked={spaceHalf} onClick={settingChenge}>半角スペース削除</Button>
         </div>
       </div>

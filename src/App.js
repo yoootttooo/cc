@@ -5,16 +5,22 @@ import { TextArea, Button, Icon, Popup } from 'semantic-ui-react';
 function App() {
   const [text, setText] = useState("");
   const [normalizedText, setNormalizedText] = useState("");
+
   const [kanaHalf, setKanaHalf] = useState(true);
-  const [line, setLine] = useState(true);
+  const [line, setLine] = useState(false);
   const [spaceFull, setSpaceFull] = useState(true);
   const [spaceHalf, setSpaceHalf] = useState(false);
+  const [breakToSpace, setBreakToSpace] = useState(true);
+
   const [count, setCount] = useState(0);
   const [originTextCount, setOriginTextCount] = useState(0);
+
   const [kanaHalfColor, setKanaHalfColor] = useState("green")
-  const [lineColor, setLineColor] = useState("green")
+  const [lineColor, setLineColor] = useState("gray")
   const [spaceFullColor, setSpaceFullColor] = useState("green")
   const [spaceHalfColor, setSpaceHalfColor] = useState("gray")
+  const [breakToSpaceColor, setBreakToSpaceColor] = useState("green")
+
 
   const handleTextareaChange = (e) => {
     if(e.target.value !== null){
@@ -36,6 +42,9 @@ function App() {
     if(e.target.value === "spaceHalf"){
       setSpaceHalf(!spaceHalf);
     }
+    if(e.target.value === "breakToSpace"){
+      setBreakToSpace(!breakToSpace);
+    }
   //updateValueの内容をもう一度やっている。綺麗なコードにしたい
     let tmpText = text
     if (kanaHalf === true){
@@ -50,7 +59,9 @@ function App() {
     if (spaceFull === true){
       tmpText = tmpText.replace(/　/g,"");
     }
-    console.log(tmpText)
+    if (breakToSpace === true){
+      tmpText = tmpText.replace(/\r\n|\n|\r/g," ");
+    }
     setNormalizedText(tmpText);
   }
 
@@ -85,7 +96,6 @@ function App() {
   };
 
   useEffect(()=>{
-    console.log(kanaHalf, line, spaceHalf, spaceFull)
     let tmpText = text
     if (kanaHalf === true){
       tmpText = katakanaConverter(tmpText);
@@ -99,17 +109,21 @@ function App() {
     if (spaceFull === true){
       tmpText = tmpText.replace(/　/g,"");
     }
+    if (breakToSpace === true){
+      tmpText = tmpText.replace(/\r\n|\n|\r/g," ");
+    }
     setCount(tmpText.length)
     setOriginTextCount(text.length)
     setNormalizedText(tmpText);
-  },[kanaHalf, line, spaceHalf, spaceFull, text])
+  },[kanaHalf, line, spaceHalf, spaceFull, breakToSpace, text])
 
   useEffect(()=>{
     kanaHalf ? setKanaHalfColor('green') : setKanaHalfColor('gray');
     line ? setLineColor('green') : setLineColor('gray');
     spaceFull ? setSpaceFullColor('green') : setSpaceFullColor('gray');
     spaceHalf ? setSpaceHalfColor('green') : setSpaceHalfColor('gray');
-  },[kanaHalf, line, spaceHalf, spaceFull])
+    breakToSpace ? setBreakToSpaceColor('green') : setBreakToSpaceColor('gray');
+  },[kanaHalf, line, spaceHalf, spaceFull, breakToSpace])
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(normalizedText)
@@ -140,9 +154,14 @@ function App() {
         <div>文字数：{count}</div>
         <div id="buttons">
             <Button size="tiny" color={kanaHalfColor} name="setting" value="kanaHalf" checked={kanaHalf} onClick={settingChenge}>半角カナ→全角カナ</Button>
+
             <Button size="tiny" color={lineColor} name="setting" value="line" checked={line} onClick={settingChenge}>改行削除</Button>
+
             <Button size="tiny" color={spaceFullColor} name="setting" value="spaceFull" checked={spaceFull} onClick={settingChenge}>全角スペース削除</Button>
+
             <Button size="tiny" color={spaceHalfColor} name="setting" value="spaceHalf" checked={spaceHalf} onClick={settingChenge}>半角スペース削除</Button>
+
+            <Button size="tiny" color={breakToSpaceColor} name="setting" value="breakToSpace" checked={breakToSpace} onClick={settingChenge}>改行→半角スペース</Button>
         </div>
       </div>
     </body>

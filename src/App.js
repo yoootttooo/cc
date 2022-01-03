@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { TextArea, Button, Icon, Popup } from 'semantic-ui-react';
 
 function App() {
@@ -20,6 +20,8 @@ function App() {
   const [spaceFullColor, setSpaceFullColor] = useState("green")
   const [spaceHalfColor, setSpaceHalfColor] = useState("gray")
   const [breakToSpaceColor, setBreakToSpaceColor] = useState("green")
+
+  const textAreaElement = useRef(null)
 
 
   const handleTextareaChange = (e) => {
@@ -124,6 +126,10 @@ function App() {
     spaceHalf ? setSpaceHalfColor('green') : setSpaceHalfColor('gray');
     breakToSpace ? setBreakToSpaceColor('green') : setBreakToSpaceColor('gray');
   },[kanaHalf, line, spaceHalf, spaceFull, breakToSpace])
+  
+  useEffect(()=>{
+    textAreaElement.current.focus()
+  },[])
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(normalizedText)
@@ -137,7 +143,7 @@ function App() {
   return (
     <body>
       <div className="App">
-        <TextArea placeholder="ここに入力" onChange={handleTextareaChange}></TextArea>
+        <TextArea ref={textAreaElement} placeholder="ここに入力" onChange={handleTextareaChange}></TextArea>
         <div>文字数：{originTextCount}</div>
         <div id="result">
           <h1 style={{display: "inline", fontSize: "1.5em"}}>結果</h1>
